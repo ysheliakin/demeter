@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"io"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -36,5 +37,9 @@ func main() {
 		return c.Render(200, "index", Payload{Message: "Hello World"})
 	})
 
-	e.Logger.Fatal(e.Start(":42069"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "42069"
+	}
+	e.Logger.Fatal(e.Start("0.0.0.0"+":"+port))
 }
