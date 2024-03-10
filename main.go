@@ -30,6 +30,8 @@ type Payload struct {
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
+	e.Use(middleware.Gzip())
+	e.Use(middleware.Static("wwwroot"))
 
 	e.Renderer = newTemplate("views/*.html")
 
@@ -41,5 +43,5 @@ func main() {
 	if port == "" {
 		port = "42069"
 	}
-	e.Logger.Fatal(e.Start("0.0.0.0"+":"+port))
+	e.Logger.Fatal(e.Start("0.0.0.0:" + port))
 }
