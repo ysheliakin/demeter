@@ -45,3 +45,11 @@ goose -dir ./db/migrations postgres $DB up
 
 goose -dir ./db/migrations postgres $DB down
 ```
+
+# Database Queries
+
+To generate Go code based on scheme and queries, go to `./db` directory, add/update queries, then run (still in `./db`):
+
+```bash
+sqlc generate
+```
