@@ -10,18 +10,38 @@ The website aims to connect individuals and organizations willing to donate food
 1. Install Go: https://go.dev/doc/install  
   (optional) Install [Air](https://github.com/cosmtrek/air?tab=readme-ov-file#installation) to track code changes on the fly. Might need to add $GOPATH/bin in your PATH somewhat like [so](https://stackoverflow.com/questions/70098792/go-install-do-i-need-to-manually-update-my-path) or [so](https://github.com/golang/go/issues/18583).
 
+2. Install [goose](https://github.com/pressly/goose) for database migration management.
+
 2. If using Air, run in the project directory:
 
   ```bash
+  export DB="<db connection string>"; 
   air
   ```
 
   - Or just run (need to restart the server any time you make code changes):
 
-  ```
+  ```bash
+  export DB="<db connection string>"; 
   go run *.go
   ```
 
 3. Enjoy the website at localhost:42069. 
 
 4. Pushes into `main` branch also result in deployments to [`demeter.adaptable.app`](https://demeter.adaptable.app/).
+
+# Database Migrations
+
+To create an empty SQL migration file (run from project root directory):
+
+```bash
+goose -dir ./db/migrations create [migration-name] sql
+```
+
+To migrate the database (this will make changes to the cloud database instance):
+
+```bash
+goose -dir ./db/migrations postgres $DB up
+
+goose -dir ./db/migrations postgres $DB down
+```
