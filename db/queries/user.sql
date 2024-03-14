@@ -1,4 +1,4 @@
 -- name: GetUser :one
 select *
-from "Users"
-where "Id" = @user_id;
+from users
+where id = @user_id;

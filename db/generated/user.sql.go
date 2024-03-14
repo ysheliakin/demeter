@@ -10,21 +10,21 @@ import (
 )
 
 const getUser = `-- name: GetUser :one
-select "Id", "IsOrganization", "Name", "Email", "About", "AvatarURL", "Images", "AuthProvider", "AuthHash", "RegisteredAt", "LastVisitedAt", "IsOnline", "LocationLat", "LocationLong"
-from "Users"
-where "Id" = $1
+select id, is_organization, name, email, about, avatar_url, images, auth_provider, auth_hash, registered_at, last_visited_at, is_online, location_lat, location_long
+from users
+where id = $1
 `
 
 func (q *Queries) GetUser(ctx context.Context, userID int32) (User, error) {
 	row := q.db.QueryRow(ctx, getUser, userID)
 	var i User
 	err := row.Scan(
-		&i.Id,
+		&i.ID,
 		&i.IsOrganization,
 		&i.Name,
 		&i.Email,
 		&i.About,
-		&i.AvatarURL,
+		&i.AvatarUrl,
 		&i.Images,
 		&i.AuthProvider,
 		&i.AuthHash,

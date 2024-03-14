@@ -1,12 +1,17 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"html/template"
 	"io"
 	"os"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	"demeter/db/generated"
 )
 
 type TemplateRegistry struct {
@@ -32,6 +37,21 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Gzip())
 	e.Use(middleware.Static("wwwroot"))
+
+	dbc := context.Background()
+	conn, err := pgx.Connect(dbc, os.Getenv("DB"))
+	if err != nil {
+		e.Logger.Fatal(err)
+		return
+	}
+	defer conn.Close(dbc)
+	query := queries.New(conn)
+
+	user, err := query.GetUser(dbc, 1)
+	if err != nil {
+		e.Logger.Errorf("failed to retrieve user: %s\n", err)
+	}
+	fmt.Println(user)
 
 	e.Renderer = newTemplate("views/*.html")
 

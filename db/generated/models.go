@@ -9,66 +9,66 @@ import (
 )
 
 type Donation struct {
-	Id            int32
-	CreatedById   int32
-	CreatedAt     pgtype.Timestamptz
-	StartsAt      pgtype.Timestamptz
-	EndsAt        pgtype.Timestamptz
-	Description   string
-	Images        pgtype.Text
-	ServingsTotal pgtype.Int4
-	ServingsLeft  pgtype.Int4
-	LocationLat   float64
-	LocationLong  float64
+	ID              int32
+	CreatedByUserID int32
+	CreatedAt       pgtype.Timestamptz
+	StartsAt        pgtype.Timestamptz
+	EndsAt          pgtype.Timestamptz
+	Description     string
+	Images          pgtype.Text
+	ServingsTotal   pgtype.Int4
+	ServingsLeft    pgtype.Int4
+	LocationLat     float64
+	LocationLong    float64
 }
 
 type DonationEvent struct {
-	Id         int32
-	DonationId int32
-	CreatedBy  int32
-	CreatedAt  pgtype.Timestamptz
-	Comment    string
-	Images     pgtype.Text
-	ReplyToId  pgtype.Int4
+	ID              int32
+	DonationID      int32
+	CreatedByUserID int32
+	CreatedAt       pgtype.Timestamptz
+	Comment         string
+	Images          pgtype.Text
+	ReplyToUserID   pgtype.Int4
 }
 
 type DonationRequest struct {
-	Id            int32
-	DonationId    pgtype.Int4
-	RequesterId   pgtype.Int4
-	Comment       pgtype.Text
-	Images        pgtype.Text
-	CreatedAt     pgtype.Timestamptz
-	AcceptedAt    pgtype.Timestamptz
-	AcceptedById  pgtype.Int4
-	ConfirmedAt   pgtype.Timestamptz
-	ConfirmedById pgtype.Int4
+	ID                int32
+	DonationID        pgtype.Int4
+	RequesterID       pgtype.Int4
+	Comment           pgtype.Text
+	Images            pgtype.Text
+	CreatedAt         pgtype.Timestamptz
+	AcceptedAt        pgtype.Timestamptz
+	AcceptedByUserID  pgtype.Int4
+	ConfirmedAt       pgtype.Timestamptz
+	ConfirmedByUserID pgtype.Int4
 }
 
 type Notification struct {
-	Id                int32
+	ID                int32
 	CreatedAt         pgtype.Timestamptz
-	DonationId        pgtype.Int4
-	DonationEventId   pgtype.Int4
-	DonationRequestId pgtype.Int4
-	RatingId          pgtype.Int4
-	UserId            pgtype.Int4
+	DonationID        pgtype.Int4
+	DonationEventID   pgtype.Int4
+	DonationRequestID pgtype.Int4
+	RatingID          pgtype.Int4
+	UserID            pgtype.Int4
 	Comment           pgtype.Text
 }
 
 type NotificationHistory struct {
-	Id             int32
-	NotificationId int32
-	UserId         int32
+	ID             int32
+	NotificationID int32
+	UserID         int32
 	SentAt         pgtype.Timestamptz
 	ReadAt         pgtype.Timestamptz
 }
 
 type Rating struct {
-	Id           int32
+	ID           int32
 	CreatedAt    pgtype.Timestamptz
-	FromId       int32
-	ToId         int32
+	FromUserID   int32
+	ToUserID     int32
 	Rating       int32
 	Comment      pgtype.Text
 	Images       pgtype.Text
@@ -77,12 +77,12 @@ type Rating struct {
 }
 
 type User struct {
-	Id             int32
+	ID             int32
 	IsOrganization bool
 	Name           string
 	Email          string
 	About          pgtype.Text
-	AvatarURL      pgtype.Text
+	AvatarUrl      pgtype.Text
 	Images         pgtype.Text
 	AuthProvider   pgtype.Text
 	AuthHash       pgtype.Text
