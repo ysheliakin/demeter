@@ -30,7 +30,7 @@ The website aims to connect individuals and organizations willing to donate food
 
 4. Pushes into `main` branch also result in deployments to [`demeter.adaptable.app`](https://demeter.adaptable.app/).
 
-# Database Migrations
+### Database Migrations
 
 To create an empty SQL migration file (run from project root directory):
 
@@ -46,7 +46,7 @@ goose -dir ./db/migrations postgres $DB up
 goose -dir ./db/migrations postgres $DB down
 ```
 
-# Database Queries
+### Database Queries
 
 To generate Go code based on scheme and queries, go to `./db` directory, add/update queries, then run (still in `./db`):
 
