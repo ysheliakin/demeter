@@ -5,19 +5,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap.min.css" />
     <script src="htmx.min.js"></script>
-    <title>Hello, World!</title>
+    <title>Demeter - food donation platform</title>
 </head>
 
-<body>
-    <a href="#" class="btn btn-default">Default</a>
-    <a href="#" class="btn btn-primary">Primary</a>
-    <a href="#" class="btn btn-success">Success</a>
-    <a href="#" class="btn btn-info">Info</a>
-    <a href="#" class="btn btn-warning">Warning</a>
-    <a href="#" class="btn btn-danger">Danger</a>
-    <h1>{{.Message}}</h1>
+<body hx-boost="true">
+
+    <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
+                aria-controls="offcanvas" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="/users-near-me">Community</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/donate">Donate</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/request">Create Request</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                        <li class="nav-item btn-group" role="group">
+                            <a class="nav-link" href="/signin">
+                                <button type="button" class="btn btn-info">
+                                    Sign In
+                                </button>
+                            </a>
+                            <a class="nav-link" href="/signup">
+                                <button type="button" class="btn btn-primary">
+                                    Sign Up
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- landing view -->
+        <div class="position-relative overflow-hidden text-center bg-body-tertiary">
+            <div class="p-lg-5 mx-auto my-5">
+                <h1 class="fw-bold">Demeter - local food donation platform</h1>
+                <h3 class="fw-normal text-muted mb-3">Connecting communities one donation at a time.</h3>
+                <div class="d-flex gap-3 justify-content-center lead fw-normal">
+                    <a class="" href="/about">
+                        <button type="button" class="btn btn-secondary">
+                            Learn more
+                        </button>
+                    </a>
+                    <a class="" href="/donate">
+                        <button type="button" class="btn btn-success">
+                            Donate
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-md-flex flex-md-equal gap-3 my-3">
+            <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">Left Block Subtitle</h2>
+                    <p class="lead">Left block subsubtitle</p>
+                </div>
+            </div>
+            <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">Right Block Subtitle</h2>
+                    <p class="lead">Right block subsubtitle</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-md-flex flex-md-equal gap-3 my-3">
+            <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">Left Block Subtitle</h2>
+                    <p class="lead">Left block subsubtitle</p>
+                </div>
+            </div>
+            <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+                <div class="my-3 py-3">
+                    <h2 class="display-5">Right Block Subtitle</h2>
+                    <p class="lead">Right block subsubtitle</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="container py-5">
+        <div class="d-flex justify-content-between">
+            <div class="col">
+                <h5>Community</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary text-decoration-none" href="/donate">Donate near me</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="/request">Create Request</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="/users-near-me">Users Near Me</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary text-decoration-none" href="/about">Motivation</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="/privacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h5>Development</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="link-secondary text-decoration-none" href="/team">Team</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="https://github.com/ysheliakin/demeter" target="_blank">Repository</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="bootstrap.min.css" />
 </body>
 
 </html>
