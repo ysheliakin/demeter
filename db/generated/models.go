@@ -20,6 +20,7 @@ type Donation struct {
 	ServingsLeft    pgtype.Int4
 	LocationLat     float64
 	LocationLong    float64
+	Title           string
 }
 
 type DonationEvent struct {
