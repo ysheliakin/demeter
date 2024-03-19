@@ -58,6 +58,9 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", Payload{Message: "Hello World"})
 	})
+	e.GET("/ui", func(c echo.Context) error {
+		return c.Render(200, "ui", nil)
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {
