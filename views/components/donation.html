@@ -1,0 +1,36 @@
+{{block "donation-post-form" .}}
+<div class="card col-md-6 col-lg-3 col-sm-12 my-3 mx-auto">
+    <div class="card-header">New Donation</div>
+    <div class="card-body">
+        <form class="row">
+            <div class="col-12 mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" required>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description"></textarea>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="starts-at" class="form-label">Start date</label>
+                <input type="datetime-local" class="form-control" id="starts-at" required>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="ends-at" class="form-label">End date</label>
+                <input type="datetime-local" class="form-control" id="ends-at">
+            </div>
+            <div class="col-12 mb-3">
+                <label for="servings-total" class="form-label">Servings</label>
+                <input type="number" min="1" class="form-control" id="servings-total">
+            </div>
+            <div class="col-12 mb-3">
+                <label for="images" class="form-label">Images</label>
+                <input type="file" class="form-control" id="images" accept="image/*">
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary w-100 my-3" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{end}}

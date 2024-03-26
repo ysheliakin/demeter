@@ -1,0 +1,25 @@
+{{block "sign-in" .}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="htmx.min.js"></script>
+    <title>Demeter - food donation platform</title>
+</head>
+
+<body hx-boost="true">
+
+    {{template "navbar"}}
+
+    <main class="container" id="page">
+        {{template "sign-in-form"}}
+    </main>
+
+    {{template "footer"}}
+
+    <link rel="stylesheet" href="bootstrap.min.css" />
+</body>
+
+{{end}}

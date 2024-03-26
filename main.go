@@ -53,10 +53,19 @@ func main() {
 	}
 	fmt.Println(user)
 
-	e.Renderer = newTemplate("views/*.html")
+	e.Renderer = newTemplate("views/*/*.html")
 
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", Payload{Message: "Hello World"})
+	})
+	e.GET("/sign-in", func(c echo.Context) error {
+		return c.Render(200, "sign-in", nil)
+	})
+	e.GET("/sign-up", func(c echo.Context) error {
+		return c.Render(200, "sign-up", nil)
+	})
+	e.GET("/donate", func(c echo.Context) error {
+		return c.Render(200, "donate", nil)
 	})
 	e.GET("/ui", func(c echo.Context) error {
 		return c.Render(200, "ui", nil)
