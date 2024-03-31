@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"html/template"
 	"io"
 	"os"
@@ -28,15 +27,12 @@ func newTemplate(path string) *TemplateRegistry {
 	}
 }
 
-type Payload struct {
-	Message string
-}
-
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Gzip())
 	e.Use(middleware.Static("wwwroot"))
+	e.Renderer = newTemplate("views/*/*.html")
 
 	dbc := context.Background()
 	conn, err := pgx.Connect(dbc, os.Getenv("DB"))
@@ -47,16 +43,6 @@ func main() {
 	defer conn.Close(dbc)
 	query := queries.New(conn)
 
-	user, err := query.GetUser(dbc, 1)
-	if err != nil {
-		e.Logger.Errorf("failed to retrieve user: %s\n", err)
-	}
-	fmt.Println(user)
-
-	e.Renderer = newTemplate("views/*/*.html")
-
-	e.GET("/", func(c echo.Context) error {
-		return c.Render(200, "index", Payload{Message: "Hello World"})
 	})
 	e.GET("/sign-in", func(c echo.Context) error {
 		return c.Render(200, "sign-in", nil)
@@ -67,8 +53,12 @@ func main() {
 	e.GET("/donate", func(c echo.Context) error {
 		return c.Render(200, "donate", nil)
 	})
-	e.GET("/ui", func(c echo.Context) error {
-		return c.Render(200, "ui", nil)
+	e.POST("/donate", func(c echo.Context) error {
+		return controllers.CreateDonation(dbc, query, c, e.Logger)
+	})
+	// NOTE: the more nested routes have to go first to not confuse echo
+	e.GET("/", func(c echo.Context) error {
+		return c.Render(200, "index", nil)
 	})
 
 	port := os.Getenv("PORT")
