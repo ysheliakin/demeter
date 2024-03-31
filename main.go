@@ -10,6 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
+	"demeter/controllers"
 	"demeter/db/generated"
 )
 
@@ -43,6 +44,8 @@ func main() {
 	defer conn.Close(dbc)
 	query := queries.New(conn)
 
+	e.POST("/validate", func(c echo.Context) error {
+		return controllers.ValidateFormInput(dbc, query, c, e.Logger)
 	})
 	e.GET("/sign-in", func(c echo.Context) error {
 		return c.Render(200, "sign-in", nil)
