@@ -1,31 +1,37 @@
 {{block "donation-post-form" .}}
-<div class="card col-md-6 col-lg-3 col-sm-12 my-3 mx-auto">
+<div class="card my-3 mx-auto" style="max-width: 600px">
     <div class="card-header">New Donation</div>
     <div class="card-body">
-        <form class="row">
+        <form class="row" hx-post="/donate" hx-swap="outerHTML" hx-select=".card, .alert" hx-target="closest .card">
             <div class="col-12 mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" required>
+                <input type="text" class="form-control" name="title" minlength="5" maxlength="255" required
+                    hx-post="/validate" hx-trigger="keyup changed delay:500ms" hx-target="next .validation-result"
+                    hx-swap="innerHTML">
+                <div class="validation-result"></div>
             </div>
             <div class="col-12 mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description"></textarea>
+                <textarea class="form-control" name="description" required hx-post="/validate"
+                    hx-trigger="keyup changed delay:500ms" hx-target="next .validation-result"
+                    hx-swap="innerHTML"></textarea>
+                <div class="validation-result"></div>
             </div>
             <div class="col-12 mb-3">
                 <label for="starts-at" class="form-label">Start date</label>
-                <input type="datetime-local" class="form-control" id="starts-at" required>
+                <input type="datetime-local" class="form-control" name="starts-at">
             </div>
             <div class="col-12 mb-3">
                 <label for="ends-at" class="form-label">End date</label>
-                <input type="datetime-local" class="form-control" id="ends-at">
+                <input type="datetime-local" class="form-control" name="ends-at">
             </div>
             <div class="col-12 mb-3">
                 <label for="servings-total" class="form-label">Servings</label>
-                <input type="number" min="1" class="form-control" id="servings-total">
+                <input type="number" min="1" class="form-control" name="servings-total">
             </div>
             <div class="col-12 mb-3">
                 <label for="images" class="form-label">Images</label>
-                <input type="file" class="form-control" id="images" accept="image/*">
+                <input type="file" class="form-control" name="images" accept="image/*">
             </div>
             <div class="col-12">
                 <button class="btn btn-primary w-100 my-3" type="submit">Submit</button>

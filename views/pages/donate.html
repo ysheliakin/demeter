@@ -11,13 +11,13 @@
 
 <body hx-boost="true">
 
-    {{template "navbar"}}
+    {{template "navbar" .}}
 
     <main class="container" id="page">
-        {{template "donation-post-form"}}
+        {{template "donation-post-form" .}}
     </main>
 
-    {{template "footer"}}
+    {{template "footer" .}}
 
     <link rel="stylesheet" href="bootstrap.min.css" />
 </body>

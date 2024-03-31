@@ -33,8 +33,8 @@
 
 {{block "footer" .}}
 <footer class="container py-5">
-    <div class="d-flex justify-content-between">
-        <div class="col">
+    <div class="d-flex justify-content-around">
+        <div>
             <h5>Community</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="link-secondary text-decoration-none" href="/donate">
@@ -43,14 +43,14 @@
                 <li><a class="link-secondary text-decoration-none" href="/users-near-me">Users near me</a></li>
             </ul>
         </div>
-        <div class="col">
+        <div>
             <h5>About</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="link-secondary text-decoration-none" href="/about">Motivation</a></li>
                 <li><a class="link-secondary text-decoration-none" href="/privacy">Privacy</a></li>
             </ul>
         </div>
-        <div class="col">
+        <div>
             <h5>Development</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="link-secondary text-decoration-none" href="/team">Team</a></li>
@@ -60,4 +60,110 @@
         </div>
     </div>
 </footer>
+{{end}}
+
+{{block "hero" .}}
+<div class="position-relative overflow-hidden text-center bg-body-tertiary">
+    <div class="p-lg-5 mx-auto my-5">
+        <h1 class="fw-bold">Demeter - local food donation platform</h1>
+        <h3 class="fw-normal text-muted mb-3">Connecting communities one donation at a time.</h3>
+        <div class="d-flex gap-3 justify-content-center lead fw-normal">
+            <a class="" href="/about">
+                <button type="button" class="btn btn-secondary">
+                    Learn more
+                </button>
+            </a>
+            <a href="/donate">
+                <button type="button" class="btn btn-success">
+                    Donate
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{block "about" .}}
+<div class="d-md-flex flex-md-equal gap-3 my-3">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Left Block Subtitle</h2>
+            <p class="lead">Left block subsubtitle</p>
+        </div>
+    </div>
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Right Block Subtitle</h2>
+            <p class="lead">Right block subsubtitle</p>
+        </div>
+    </div>
+</div>
+
+<div class="d-md-flex flex-md-equal gap-3 my-3">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Left Block Subtitle</h2>
+            <p class="lead">Left block subsubtitle</p>
+        </div>
+    </div>
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Right Block Subtitle</h2>
+            <p class="lead">Right block subsubtitle</p>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{block "msg-info" .}}
+<div class="alert alert-primary d-flex align-items-center my-2" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-info-circle-fill mx-2" viewBox="0 0 16 16">
+        <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+        <div>
+            {{.}}
+        </div>
+    </svg>
+</div>
+{{end}}
+
+{{block "msg-success" .}}
+<div class="alert alert-success d-flex align-items-center my-2" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill mx-2"
+        viewBox="0 0 16 16">
+        <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        <div>
+            {{.}}
+        </div>
+</div>
+{{end}}
+
+{{block "msg-warning" .}}
+<div class="alert alert-warning d-flex align-items-center my-2" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-exclamation-circle-fill mx-2" viewBox="0 0 16 16">
+        <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+        <div>
+            {{.}}
+        </div>
+    </svg>
+</div>
+{{end}}
+
+{{block "msg-danger" .}}
+<div class="alert alert-danger d-flex align-items-center my-2" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-stop-fill mx-2"
+        viewBox="0 0 16 16">
+        <path
+            d="M10.371 8.277v-.553c0-.827-.422-1.234-.987-1.234-.572 0-.99.407-.99 1.234v.553c0 .83.418 1.237.99 1.237.565 0 .987-.408.987-1.237m2.586-.24c.463 0 .735-.272.735-.744s-.272-.741-.735-.741h-.774v1.485z" />
+        <path
+            d="M4.893 0a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146A.5.5 0 0 0 11.107 0zM3.16 10.08c-.931 0-1.447-.493-1.494-1.132h.653c.065.346.396.583.891.583.524 0 .83-.246.83-.62 0-.303-.203-.467-.637-.572l-.656-.164c-.61-.147-.978-.51-.978-1.078 0-.706.597-1.184 1.444-1.184.853 0 1.386.475 1.436 1.087h-.645c-.064-.32-.352-.542-.797-.542-.472 0-.77.246-.77.6 0 .261.196.437.553.522l.654.161c.673.164 1.06.487 1.06 1.11 0 .736-.574 1.228-1.544 1.228Zm3.427-3.51V10h-.665V6.57H4.753V6h3.006v.568H6.587Zm4.458 1.16v.544c0 1.131-.636 1.805-1.661 1.805-1.026 0-1.664-.674-1.664-1.805V7.73c0-1.136.638-1.807 1.664-1.807s1.66.674 1.66 1.807ZM11.52 6h1.535c.82 0 1.316.55 1.316 1.292 0 .747-.501 1.289-1.321 1.289h-.865V10h-.665V6.001Z" />
+    </svg>
+    <div>
+        {{.}}
+    </div>
+</div>
 {{end}}
