@@ -11,9 +11,9 @@ import (
 type Donation struct {
 	ID              int32
 	CreatedByUserID int32
-	CreatedAt       pgtype.Timestamptz
-	StartsAt        pgtype.Timestamptz
-	EndsAt          pgtype.Timestamptz
+	CreatedAt       pgtype.Timestamp
+	StartsAt        pgtype.Timestamp
+	EndsAt          pgtype.Timestamp
 	Description     string
 	Images          pgtype.Text
 	ServingsTotal   pgtype.Int4
@@ -27,7 +27,7 @@ type DonationEvent struct {
 	ID              int32
 	DonationID      int32
 	CreatedByUserID int32
-	CreatedAt       pgtype.Timestamptz
+	CreatedAt       pgtype.Timestamp
 	Comment         string
 	Images          pgtype.Text
 	ReplyToUserID   pgtype.Int4
@@ -39,16 +39,16 @@ type DonationRequest struct {
 	RequesterID       pgtype.Int4
 	Comment           pgtype.Text
 	Images            pgtype.Text
-	CreatedAt         pgtype.Timestamptz
-	AcceptedAt        pgtype.Timestamptz
+	CreatedAt         pgtype.Timestamp
+	AcceptedAt        pgtype.Timestamp
 	AcceptedByUserID  pgtype.Int4
-	ConfirmedAt       pgtype.Timestamptz
+	ConfirmedAt       pgtype.Timestamp
 	ConfirmedByUserID pgtype.Int4
 }
 
 type Notification struct {
 	ID                int32
-	CreatedAt         pgtype.Timestamptz
+	CreatedAt         pgtype.Timestamp
 	DonationID        pgtype.Int4
 	DonationEventID   pgtype.Int4
 	DonationRequestID pgtype.Int4
@@ -61,13 +61,13 @@ type NotificationHistory struct {
 	ID             int32
 	NotificationID int32
 	UserID         int32
-	SentAt         pgtype.Timestamptz
-	ReadAt         pgtype.Timestamptz
+	SentAt         pgtype.Timestamp
+	ReadAt         pgtype.Timestamp
 }
 
 type Rating struct {
 	ID           int32
-	CreatedAt    pgtype.Timestamptz
+	CreatedAt    pgtype.Timestamp
 	FromUserID   int32
 	ToUserID     int32
 	Rating       int32
@@ -87,8 +87,8 @@ type User struct {
 	Images         pgtype.Text
 	AuthProvider   pgtype.Text
 	AuthHash       pgtype.Text
-	RegisteredAt   pgtype.Timestamptz
-	LastVisitedAt  pgtype.Timestamptz
+	RegisteredAt   pgtype.Timestamp
+	LastVisitedAt  pgtype.Timestamp
 	IsOnline       bool
 	LocationLat    pgtype.Float8
 	LocationLong   pgtype.Float8
