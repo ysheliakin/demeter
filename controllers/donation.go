@@ -11,6 +11,7 @@ import (
 	"demeter/db/generated"
 )
 
+// TODO: these probably need to be moved to a different place, not in donation.go
 func getValidationErrorMessage(key, val string) string {
 	switch key {
 	case "title":
@@ -36,19 +37,22 @@ func ValidateFormInput(dbc context.Context, query *queries.Queries, ctx echo.Con
 }
 
 func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
+	// TODO: use getValidationErrorMessage for all fields to check.
+	//	     If all good, then submit
+	//		 Otherwise, return only error messages (btw, how?)
 	validationErrors := make(map[string]string)
 
 	title := ctx.FormValue("title")
 	description := ctx.FormValue("description")
-	startsAt := pgtype.Timestamptz{Valid: false}
+	startsAt := pgtype.Timestamp{Valid: false}
 	_startsAt, err := time.Parse(time.RFC3339, ctx.FormValue("starts-at"))
 	if err == nil {
-		startsAt = pgtype.Timestamptz{Time: _startsAt}
+		startsAt = pgtype.Timestamp{Time: _startsAt}
 	}
-	endsAt := pgtype.Timestamptz{Valid: false}
+	endsAt := pgtype.Timestamp{Valid: false}
 	_endsAt, err := time.Parse(time.RFC3339, ctx.FormValue("ends-at"))
 	if err == nil {
-		endsAt = pgtype.Timestamptz{Time: _endsAt}
+		endsAt = pgtype.Timestamp{Time: _endsAt}
 	}
 	total := pgtype.Int4{Valid: false}
 	if _total, err := strconv.Atoi(ctx.FormValue("servings-total")); err == nil {
