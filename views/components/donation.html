@@ -2,19 +2,19 @@
 <div class="card my-3 mx-auto" style="max-width: 600px">
     <div class="card-header">New Donation</div>
     <div class="card-body">
-        <form class="row" hx-post="/donate" hx-swap="outerHTML" hx-select=".card, .alert" hx-target="closest .card">
+        <form id="post" hx-post="/donate" hx-swap="outerHTML" hx-select=".card, .alert" hx-target="closest .card">
             <div class="col-12 mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" minlength="5" maxlength="255" required
-                    hx-post="/validate" hx-trigger="keyup changed delay:500ms" hx-target="next .validation-result"
-                    hx-swap="innerHTML">
+                <input type="text" class="form-control" name="title" required minlength="5" maxlength="255"
+                    hx-post="/validate" hx-trigger="revealed, keyup changed delay:200ms"
+                    hx-target="next .validation-result" hx-swap="innerHTML">
                 <div class="validation-result"></div>
             </div>
             <div class="col-12 mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" name="description" required hx-post="/validate"
-                    hx-trigger="keyup changed delay:500ms" hx-target="next .validation-result"
-                    hx-swap="innerHTML"></textarea>
+                <textarea class="form-control" name="description" hx-post="/validate" required minlength="5"
+                    maxlength="4096" hx-trigger="revealed, keyup changed delay:200ms"
+                    hx-target="next .validation-result" hx-swap="innerHTML"></textarea>
                 <div class="validation-result"></div>
             </div>
             <div class="col-12 mb-3">
@@ -39,4 +39,9 @@
         </form>
     </div>
 </div>
+
+<script>
+    const form = document.querySelector("#post");
+    form.addEventListener("submit", e => e.preventDefault(), true);
+</script>
 {{end}}

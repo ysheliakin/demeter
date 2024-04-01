@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -37,10 +38,14 @@ func ValidateFormInput(dbc context.Context, query *queries.Queries, ctx echo.Con
 }
 
 func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
-	// TODO: use getValidationErrorMessage for all fields to check.
-	//	     If all good, then submit
-	//		 Otherwise, return only error messages (btw, how?)
-	validationErrors := make(map[string]string)
+	ctx.Request().ParseForm()
+	for key := range ctx.Request().PostForm {
+		if getValidationErrorMessage(key, ctx.FormValue(key)) != "" {
+			// do nothing if any validation errors were found
+			// because the validation messages should already be shown in UI
+			return ctx.NoContent(406)
+		}
+	}
 
 	title := ctx.FormValue("title")
 	description := ctx.FormValue("description")
@@ -60,22 +65,21 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 	}
 
 	payload := queries.CreateDonationParams{
-		Title:         title,
-		StartsAt:      startsAt,
-		EndsAt:        endsAt,
-		Description:   description,
-		Images:        pgtype.Text{}, // TODO:
-		ServingsTotal: total,
-		ServingsLeft:  total,
-		LocationLat:   0.0, // TODO:
-		LocationLong:  0.0, // TODO:
+		Title:           title,
+		CreatedByUserID: 1, // TODO:
+		StartsAt:        startsAt,
+		EndsAt:          endsAt,
+		Description:     description,
+		Images:          pgtype.Text{}, // TODO:
+		ServingsTotal:   total,
+		ServingsLeft:    total,
+		LocationLat:     0.0, // TODO:
+		LocationLong:    0.0, // TODO:
 	}
 	_, err = query.CreateDonation(dbc, payload)
 	if err != nil {
-		log.Errorf("failed to created a donation: %s, error: %s\n")
-	} else if len(validationErrors) == 0 {
-		return ctx.Render(201, "msg-success", "Successfully created new donation posting!")
+		log.Error(err)
+		return ctx.Render(200, "msg-danger", fmt.Sprint("Internal error occurred: ", err.Error()))
 	}
-
-	return ctx.Render(200, "donate", nil)
+	return ctx.Render(200, "msg-success", "Donation post created successfully!")
 }
