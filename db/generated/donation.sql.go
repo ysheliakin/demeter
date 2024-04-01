@@ -16,28 +16,28 @@ insert into donations(
     title, created_by_user_id, created_at, starts_at, ends_at, description, images, servings_total, servings_left, location_lat, location_long
 )
 values (
-    $1, NOW(), $2, $3, $4, $5, $6, $7, $8, $9, $10
+    $1, $2, NOW(), $3, $4, $5, $6, $7, $8, $9, $10
 )
 returning id
 `
 
 type CreateDonationParams struct {
-	Title         string
-	CreatedAt     pgtype.Timestamp
-	StartsAt      pgtype.Timestamp
-	EndsAt        pgtype.Timestamp
-	Description   string
-	Images        pgtype.Text
-	ServingsTotal pgtype.Int4
-	ServingsLeft  pgtype.Int4
-	LocationLat   float64
-	LocationLong  float64
+	Title           string
+	CreatedByUserID int32
+	StartsAt        pgtype.Timestamp
+	EndsAt          pgtype.Timestamp
+	Description     string
+	Images          pgtype.Text
+	ServingsTotal   pgtype.Int4
+	ServingsLeft    pgtype.Int4
+	LocationLat     float64
+	LocationLong    float64
 }
 
 func (q *Queries) CreateDonation(ctx context.Context, arg CreateDonationParams) (int32, error) {
 	row := q.db.QueryRow(ctx, createDonation,
 		arg.Title,
-		arg.CreatedAt,
+		arg.CreatedByUserID,
 		arg.StartsAt,
 		arg.EndsAt,
 		arg.Description,
