@@ -32,8 +32,8 @@
 {{end}}
 
 {{block "footer" .}}
-<footer class="container py-5">
-    <div class="d-flex justify-content-around">
+<footer class="footer mt-auto py-3 bg-body-tertiary">
+    <div class="container d-flex justify-content-around">
         <div>
             <h5>Community</h5>
             <ul class="list-unstyled text-small">
@@ -116,7 +116,7 @@
 {{end}}
 
 {{block "msg-info" .}}
-<div class="alert alert-primary d-flex align-items-center my-2" role="alert">
+<div class="alert alert-primary d-flex align-items-center my-2 mx-auto" style="max-width: 600px" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-info-circle-fill mx-2" viewBox="0 0 16 16">
         <path
@@ -129,9 +129,9 @@
 {{end}}
 
 {{block "msg-success" .}}
-<div class="alert alert-success d-flex align-items-center my-2" role="alert">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill mx-2"
-        viewBox="0 0 16 16">
+<div class="alert alert-success d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-check-circle-fill mx-2" viewBox="0 0 16 16">
         <path
             d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
         <div>
@@ -141,7 +141,7 @@
 {{end}}
 
 {{block "msg-warning" .}}
-<div class="alert alert-warning d-flex align-items-center my-2" role="alert">
+<div class="alert alert-warning d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-exclamation-circle-fill mx-2" viewBox="0 0 16 16">
         <path
@@ -154,7 +154,7 @@
 {{end}}
 
 {{block "msg-danger" .}}
-<div class="alert alert-danger d-flex align-items-center my-2" role="alert">
+<div class="alert alert-danger d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-stop-fill mx-2"
         viewBox="0 0 16 16">
         <path

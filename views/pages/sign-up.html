@@ -9,15 +9,15 @@
     <title>Demeter - food donation platform</title>
 </head>
 
-<body hx-boost="true">
+<body hx-boost="true" class="d-flex flex-column min-vh-100">
 
-    {{template "navbar"}}
+    {{template "navbar" .}}
 
     <main class="container" id="page">
-        {{template "sign-up-form"}}
+        {{template "sign-up-form" .}}
     </main>
 
-    {{template "footer"}}
+    {{template "footer" .}}
 
     <link rel="stylesheet" href="bootstrap.min.css" />
 </body>
