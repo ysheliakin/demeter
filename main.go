@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"demeter/controllers"
+	"demeter/handlers"
 	"demeter/db/generated"
 )
 
@@ -45,7 +45,7 @@ func main() {
 	query := queries.New(conn)
 
 	e.POST("/validate", func(c echo.Context) error {
-		return controllers.ValidateFormInput(dbc, query, c, e.Logger)
+		return handlers.ValidateFormInput(dbc, query, c, e.Logger)
 	})
 	e.GET("/sign-in", func(c echo.Context) error {
 		return c.Render(200, "sign-in", nil)
@@ -57,7 +57,7 @@ func main() {
 		return c.Render(200, "donate", nil)
 	})
 	e.POST("/donate", func(c echo.Context) error {
-		return controllers.CreateDonation(dbc, query, c, e.Logger)
+		return handlers.CreateDonation(dbc, query, c, e.Logger)
 	})
 	// NOTE: the more nested routes have to go first to not confuse echo
 	e.GET("/", func(c echo.Context) error {
