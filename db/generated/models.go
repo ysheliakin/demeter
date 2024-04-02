@@ -18,8 +18,8 @@ type Donation struct {
 	Images          pgtype.Text
 	ServingsTotal   pgtype.Int4
 	ServingsLeft    pgtype.Int4
-	LocationLat     float64
-	LocationLong    float64
+	LocationLat     pgtype.Numeric
+	LocationLong    pgtype.Numeric
 	Title           string
 }
 
@@ -73,8 +73,8 @@ type Rating struct {
 	Rating       int32
 	Comment      pgtype.Text
 	Images       pgtype.Text
-	LocationLat  float64
-	LocationLong float64
+	LocationLat  pgtype.Numeric
+	LocationLong pgtype.Numeric
 }
 
 type User struct {
@@ -90,6 +90,6 @@ type User struct {
 	RegisteredAt   pgtype.Timestamp
 	LastVisitedAt  pgtype.Timestamp
 	IsOnline       bool
-	LocationLat    pgtype.Float8
-	LocationLong   pgtype.Float8
+	LocationLat    pgtype.Numeric
+	LocationLong   pgtype.Numeric
 }

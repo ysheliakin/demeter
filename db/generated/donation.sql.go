@@ -30,8 +30,8 @@ type CreateDonationParams struct {
 	Images          pgtype.Text
 	ServingsTotal   pgtype.Int4
 	ServingsLeft    pgtype.Int4
-	LocationLat     float64
-	LocationLong    float64
+	LocationLat     pgtype.Numeric
+	LocationLong    pgtype.Numeric
 }
 
 func (q *Queries) CreateDonation(ctx context.Context, arg CreateDonationParams) (int32, error) {
