@@ -48,8 +48,8 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 		Images:          pgtype.Text{}, // TODO:
 		ServingsTotal:   total,
 		ServingsLeft:    total,
-		LocationLat:     0.0, // TODO:
-		LocationLong:    0.0, // TODO:
+		// LocationLat:     0.0, // TODO:
+		// LocationLong:    0.0, // TODO:
 	}
 	_, err = query.CreateDonation(dbc, payload)
 	if err != nil {

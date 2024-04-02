@@ -44,6 +44,9 @@ func main() {
 	defer conn.Close(dbc)
 	query := queries.New(conn)
 
+	e.GET("/location", func(c echo.Context) error {
+		return handlers.GetLocationResults(dbc, query, c, e.Logger)
+	})
 	e.POST("/validate", func(c echo.Context) error {
 		return handlers.ValidateFormInput(dbc, query, c, e.Logger)
 	})
