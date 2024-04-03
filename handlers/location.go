@@ -67,7 +67,6 @@ func GetLocationResults(dbc context.Context, query *queries.Queries, ctx echo.Co
 		if err != nil {
 			return ctx.JSON(422, LocationMessage{fmt.Sprintf("Unable to get users in requested range: %s", err.Error())})
 		}
-		fmt.Println(results)
 		return ctx.JSON(200, results)
 
 	case "donations":
@@ -76,7 +75,6 @@ func GetLocationResults(dbc context.Context, query *queries.Queries, ctx echo.Co
 		if err != nil {
 			return ctx.JSON(422, LocationMessage{fmt.Sprintf("Unable to get donations in requested range: %s", err.Error())})
 		}
-		fmt.Println(results)
 		return ctx.JSON(200, results)
 
 	default:
