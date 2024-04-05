@@ -1,0 +1,52 @@
+{{block "location" .}}
+<input type="hidden" step="0.000001" class="d-none" name="location-lat">
+<input type="hidden" step="0.000001" class="d-none" name="location-long">
+<div id="map" style="height: 300px"></div>
+
+<link rel="stylesheet" href="leaflet.css">
+<link rel="stylesheet" href="L.Control.Locate.min.css" />
+
+<script src="leaflet.min.js"></script>
+<script src="L.Control.Locate.min.js"></script>
+
+<script>
+    var lat = document.querySelector("input[name='location-lat']");
+    var long = document.querySelector("input[name='location-long']");
+    var map = L.map("map").setView([39.8283, -98.5795], 4);
+    L.Icon.Default.imagePath = '/icons/';
+    var marker;
+    var detector = L.control
+        .locate({
+            position: "topright",
+            strings: {
+                title: "Locate me!"
+            },
+            locateOptions: {
+                enableHighAccuracy: true,
+                maxZoom: 10,
+                watch: false,
+                setView: true,
+                cacheLocation: true,
+            },
+            metric: false,
+        })
+        .addTo(map);
+    detector.start();
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>"
+    }).addTo(map);
+
+    function setLocation(location) {
+        marker && map.removeLayer(marker);
+        detector.stop();
+        marker = L.marker(location).addTo(map);
+        lat.value = location.lat;
+        long.value = location.lng;
+    }
+
+    map.on("click", e => setLocation(e.latlng));
+    map.on("locationfound", e => setLocation(e.latlng));
+
+</script>
+{{end}}
