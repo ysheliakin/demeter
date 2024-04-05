@@ -39,8 +39,16 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 		total = pgtype.Int4{Int32: int32(_total)}
 	}
 
-	tmpNum := new(pgtype.Numeric)
-	tmpNum.Scan("0.0")
+	locationLat := new(pgtype.Numeric)
+	locationLat.Scan("0.0")
+	if ctx.FormValue("location-lat") != "" {
+		locationLat.Scan(ctx.FormValue("location-lat"))
+	}
+	locationLong := new(pgtype.Numeric)
+	locationLong.Scan("0.0")
+	if ctx.FormValue("location-long") != "" {
+		locationLong.Scan(ctx.FormValue("location-long"))
+	}
 
 	payload := queries.CreateDonationParams{
 		Title:           title,
@@ -51,8 +59,8 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 		Images:          pgtype.Text{}, // TODO:
 		ServingsTotal:   total,
 		ServingsLeft:    total,
-		LocationLat:     *tmpNum, // TODO:
-		LocationLong:    *tmpNum, // TODO:
+		LocationLat:     *locationLat,
+		LocationLong:    *locationLong,
 	}
 	_, err = query.CreateDonation(dbc, payload)
 	if err != nil {
