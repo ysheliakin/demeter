@@ -1,0 +1,26 @@
+{{define "donationPostFeed"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Donation Posts</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body hx-boost="true" class="d-flex flex-column min-vh-100">
+    {{template "navbar" .}}
+    <main class="container" id="page">
+        {{range .}}
+        <div class="card my-3">
+            <div class="card-body">
+                <h5 class="card-title">{{.Title}}</h5>
+                <p class="card-text">{{.Description}}</p>
+                <!-- Add more fields as necessary -->
+            </div>
+        </div>
+        {{end}}
+    </main>
+    {{template "footer" .}}
+</body>
+</html>
+{{end}}

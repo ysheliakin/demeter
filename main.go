@@ -66,6 +66,12 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", nil)
 	})
+	e.GET("/donationPostFeed", func(c echo.Context) error {
+    return handlers.GetDonationPosts(dbc, query, c, e.Logger)
+	})
+	e.POST("/donationPostFeed", func(c echo.Context) error {
+		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
+	})
 
 	port := os.Getenv("PORT")
 	if port == "" {
