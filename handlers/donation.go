@@ -65,6 +65,9 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 	}
 	files := form.File["images"]
 	images, err := UploadImages(&files)
+	if err != nil {
+		return err
+	}
 	fmt.Println(*images)
 
 	payload := queries.CreateDonationParams{

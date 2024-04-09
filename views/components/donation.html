@@ -3,7 +3,7 @@
     <div class="card-header">New Donation</div>
     <div class="card-body">
         <form id="post" hx-post="/donate" hx-encoding="multipart/form-data" hx-swap="outerHTML"
-            hx-select=".card, .alert" hx-target="closest .card">
+            hx-select=".card, .alert" hx-target="closest .card" hx-indicator=".htmx-indicator">
             <div class="col-12 mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" name="title" required minlength="5" maxlength="255"
@@ -39,6 +39,7 @@
             {{template "location" .}}
             <div class="col-12">
                 <button class="btn btn-primary w-100 my-3" type="submit">Submit</button>
+                {{template "spinner" "Submitting form..."}}
             </div>
         </form>
     </div>
