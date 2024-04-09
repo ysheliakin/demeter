@@ -1,34 +1,41 @@
 {{block "navbar" .}}
-<nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+<nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom mb-4" data-bs-theme="dark"
+    style="position: fixed; top: 0; right: 0; left: 0; z-index: 1030;">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
-            aria-controls="offcanvas" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+            aria-label="Toggle navigation"
+            onclick="(function() { document.querySelector('#navbarCollapse').classList.toggle('show') } )()">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-            <div class="offcanvas-body">
-                <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="/users-near-me">Community</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/donate">Donate</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/request">Create Request</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-                    <li class="nav-item btn-group" role="group">
-                        <a class="nav-link" href="/sign-in">
-                            <button type="button" class="btn btn-info">
-                                Sign In
-                            </button>
-                        </a>
-                        <a class="nav-link" href="/sign-up">
-                            <button type="button" class="btn btn-primary">
-                                Sign Up
-                            </button>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+            <ul class="navbar-nav flex-grow-1 justify-content-between align-items-center">
+                <li class="nav-item"><a class="nav-link" href="/users-near-me">Community</a></li>
+                <li class="nav-item"><a class="nav-link" href="/donate">Donate</a></li>
+                <li class="nav-item"><a class="nav-link" href="/request">Create Request</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item btn-group" role="group">
+                    <a class="nav-link mx-1" href="/sign-in">
+                        <button type="button" class="btn btn-info">
+                            Sign In
+                        </button>
+                    </a>
+                    <a class="nav-link mx-1" href="/sign-up">
+                        <button type="button" class="btn btn-primary">
+                            Sign Up
+                        </button>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
+
+<style>
+    #page {
+        padding-top: 80px;
+    }
+</style>
 {{end}}
 
 {{block "footer" .}}
@@ -68,7 +75,7 @@
         <h1 class="fw-bold">Demeter - local food donation platform</h1>
         <h3 class="fw-normal text-muted mb-3">Connecting communities one donation at a time.</h3>
         <div class="d-flex gap-3 justify-content-center lead fw-normal">
-            <a class="" href="/about">
+            <a href="/about">
                 <button type="button" class="btn btn-secondary">
                     Learn more
                 </button>
@@ -84,14 +91,14 @@
 {{end}}
 
 {{block "about" .}}
-<div class="d-md-flex flex-md-equal gap-3 my-3">
-    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+<div class="d-md-flex flex-md-equal gap-3">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50-md w-100 mb-3">
         <div class="my-3 py-3">
             <h2 class="display-5">Left Block Subtitle</h2>
             <p class="lead">Left block subsubtitle</p>
         </div>
     </div>
-    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50-md w-100 mb-3">
         <div class="my-3 py-3">
             <h2 class="display-5">Right Block Subtitle</h2>
             <p class="lead">Right block subsubtitle</p>
@@ -99,14 +106,14 @@
     </div>
 </div>
 
-<div class="d-md-flex flex-md-equal gap-3 my-3">
-    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+<div class="d-md-flex flex-md-equal gap-3">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50-md w-100 mb-3">
         <div class="my-3 py-3">
             <h2 class="display-5">Left Block Subtitle</h2>
             <p class="lead">Left block subsubtitle</p>
         </div>
     </div>
-    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+    <div class="text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50-md w-100 mb-3">
         <div class="my-3 py-3">
             <h2 class="display-5">Right Block Subtitle</h2>
             <p class="lead">Right block subsubtitle</p>
@@ -129,7 +136,7 @@
 {{end}}
 
 {{block "msg-success" .}}
-<div class="alert alert-success d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
+<div class="alert alert-success d-flex align-items-center my-2 mx-auto" style="max-width: 600px" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-check-circle-fill mx-2" viewBox="0 0 16 16">
         <path
@@ -141,7 +148,7 @@
 {{end}}
 
 {{block "msg-warning" .}}
-<div class="alert alert-warning d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
+<div class="alert alert-warning d-flex align-items-center my-2 mx-auto" style="max-width: 600px" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         class="bi bi-exclamation-circle-fill mx-2" viewBox="0 0 16 16">
         <path
@@ -154,7 +161,7 @@
 {{end}}
 
 {{block "msg-danger" .}}
-<div class="alert alert-danger d-flex align-items-center my-2 mx-auto" style="max-width: 600px"role="alert">
+<div class="alert alert-danger d-flex align-items-center my-2 mx-auto" style="max-width: 600px" role="alert">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-stop-fill mx-2"
         viewBox="0 0 16 16">
         <path
