@@ -3,6 +3,8 @@ package handlers
 import (
 	"context"
 	"fmt"
+	"strings"
+
 	"strconv"
 	"time"
 
@@ -12,8 +14,12 @@ import (
 	"demeter/db/generated"
 )
 
+type ImageKitResponse struct {
+	URL string `json:"url"`
+}
+
 func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
-	ctx.Request().ParseForm()
+	ctx.Request().ParseMultipartForm(2 << 24) // 32MB
 	for key := range ctx.Request().PostForm {
 		if GetValidationErrorMessage(key, ctx.FormValue(key)) != "" {
 			// do nothing if any validation errors were found
@@ -50,22 +56,32 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 		locationLong.Scan(ctx.FormValue("location-long"))
 	}
 
+	form, err := ctx.MultipartForm()
+	if err != nil {
+		return err
+	}
+	files := form.File["images"]
+	images, err := UploadImages(&files)
+
 	payload := queries.CreateDonationParams{
 		Title:           title,
 		CreatedByUserID: 1, // TODO:
 		StartsAt:        startsAt,
 		EndsAt:          endsAt,
 		Description:     description,
-		Images:          pgtype.Text{}, // TODO:
+		Images:          pgtype.Text{String: strings.Join(*images, ","), Valid: true},
 		ServingsTotal:   total,
 		ServingsLeft:    total,
 		LocationLat:     *locationLat,
 		LocationLong:    *locationLong,
 	}
-	_, err = query.CreateDonation(dbc, payload)
+	id, err := query.CreateDonation(dbc, payload)
 	if err != nil {
 		log.Error(err)
 		return ctx.Render(200, "msg-danger", fmt.Sprint("Internal error occurred: ", err.Error()))
 	}
+	// TODO: redirect to the newly created post page?
+	fmt.Printf("new donation id: %d\n", id)
 	return ctx.Render(200, "msg-success", "Donation post created successfully!")
 }
+
