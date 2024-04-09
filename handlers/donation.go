@@ -30,19 +30,22 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 
 	title := ctx.FormValue("title")
 	description := ctx.FormValue("description")
-	startsAt := pgtype.Timestamp{Valid: false}
-	_startsAt, err := time.Parse(time.RFC3339, ctx.FormValue("starts-at"))
+	startsAt := pgtype.Timestamp{}
+	_startsAt, err := time.Parse("2006-01-02T15:04", ctx.FormValue("starts-at"))
 	if err == nil {
-		startsAt = pgtype.Timestamp{Time: _startsAt}
+		startsAt = pgtype.Timestamp{Time: _startsAt, Valid: true}
+	} else {
+		fmt.Println(ctx.FormValue("starts-at"))
+		fmt.Println(err)
 	}
-	endsAt := pgtype.Timestamp{Valid: false}
-	_endsAt, err := time.Parse(time.RFC3339, ctx.FormValue("ends-at"))
+	endsAt := pgtype.Timestamp{}
+	_endsAt, err := time.Parse("2006-01-02T15:04", ctx.FormValue("ends-at"))
 	if err == nil {
-		endsAt = pgtype.Timestamp{Time: _endsAt}
+		endsAt = pgtype.Timestamp{Time: _endsAt, Valid: true}
 	}
-	total := pgtype.Int4{Valid: false}
+	total := pgtype.Int4{}
 	if _total, err := strconv.Atoi(ctx.FormValue("servings-total")); err == nil {
-		total = pgtype.Int4{Int32: int32(_total)}
+		total = pgtype.Int4{Int32: int32(_total), Valid: true}
 	}
 
 	locationLat := new(pgtype.Numeric)
@@ -62,6 +65,7 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 	}
 	files := form.File["images"]
 	images, err := UploadImages(&files)
+	fmt.Println(*images)
 
 	payload := queries.CreateDonationParams{
 		Title:           title,
@@ -75,6 +79,7 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 		LocationLat:     *locationLat,
 		LocationLong:    *locationLong,
 	}
+	fmt.Println(payload)
 	id, err := query.CreateDonation(dbc, payload)
 	if err != nil {
 		log.Error(err)
