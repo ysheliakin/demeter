@@ -16,6 +16,7 @@ The website aims to connect individuals and organizations willing to donate food
 
   ```bash
   export DB="<db connection string>"; 
+  export IMAGEKIT_API_KEY="<private image hosting key>"; 
   air
   ```
 

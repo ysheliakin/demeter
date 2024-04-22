@@ -2,7 +2,8 @@
 <div class="card my-3 mx-auto" style="max-width: 600px">
     <div class="card-header">New Donation</div>
     <div class="card-body">
-        <form id="post" hx-post="/donate" hx-swap="outerHTML" hx-select=".card, .alert" hx-target="closest .card">
+        <form id="post" hx-post="/donate" hx-encoding="multipart/form-data" hx-swap="outerHTML"
+            hx-select=".card, .alert" hx-target="closest .card" hx-indicator=".htmx-indicator">
             <div class="col-12 mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" name="title" required minlength="5" maxlength="255"
@@ -30,12 +31,15 @@
                 <input type="number" min="1" class="form-control" name="servings-total">
             </div>
             <div class="col-12 mb-3">
-                <label for="images" class="form-label">Images</label>
-                <input type="file" class="form-control" name="images" accept="image/*">
+                <label for="images" class="form-label">Images</label><br>
+                <small class="text-muted">Up to 10 images, each no more than 10MB.</small>
+                <input type="file" class="form-control" name="images" accept="image/*" multiple
+                    onchange="(function(e) { if (e.target.files.length > 10) alert('Only first 10 images will be added.') })(event)">
             </div>
             {{template "location" .}}
             <div class="col-12">
                 <button class="btn btn-primary w-100 my-3" type="submit">Submit</button>
+                {{template "spinner" "Submitting form..."}}
             </div>
         </form>
     </div>
