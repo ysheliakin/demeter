@@ -1,5 +1,7 @@
 # Demeter: Local Food Donation Platform
 
+![alt text](wwwroot/demeter.png "Demeter App Logo")
+
 >In ancient Greek religion and mythology, Demeter (/dɪˈmiːtər/) is the Olympian goddess of the harvest and agriculture, presiding over crops, grains, food, and the fertility of the earth.
 >Source: https://en.wikipedia.org/wiki/Demeter
 
