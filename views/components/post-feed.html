@@ -1,0 +1,11 @@
+{{define "post-feed"}}
+{{range .}}
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="card-title">{{.Title}}</h5>
+        <p class="card-text">{{.Description}}</p>
+        <!-- Add more fields as necessary -->
+    </div>
+</div>
+{{end}}
+{{end}}

@@ -12,6 +12,8 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"demeter/db/generated"
+
+	"net/http"
 )
 
 type ImageKitResponse struct {
@@ -93,3 +95,12 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 	return ctx.Render(200, "msg-success", "Donation post created successfully!")
 }
 
+func GetDonationPosts(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
+    // get donation post data
+    donations, err := query.GetDonations(dbc)
+    if err != nil {
+        return err
+    }
+
+    return ctx.Render(http.StatusOK, "feed", donations)
+}

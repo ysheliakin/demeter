@@ -10,8 +10,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"demeter/handlers"
 	"demeter/db/generated"
+	"demeter/handlers"
 )
 
 type TemplateRegistry struct {
@@ -65,6 +65,9 @@ func main() {
 	// NOTE: the more nested routes have to go first to not confuse echo
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", nil)
+	})
+	e.GET("/feed", func(c echo.Context) error {
+		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
 	})
 
 	port := os.Getenv("PORT")

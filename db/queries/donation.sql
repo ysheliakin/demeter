@@ -6,3 +6,6 @@ values (
     $1, $2, NOW(), $3, $4, $5, $6, $7, $8, $9, $10
 )
 returning id;
+
+-- name: GetDonations :many
+SELECT * FROM donations;
