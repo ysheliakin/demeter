@@ -62,8 +62,6 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{ .Description }}</p>
-        <!-- <p>Total servings: {{ .ServingsTotal}}</p> -->
-        <!-- <p>Servings left: {{ .ServingsLeft}}</p> -->
         <a href="/request/{{.ID}}" class="btn btn-info float-right">Request</a>
         <a href="/post/{{.ID}}" class="btn btn-primary float-right">Learn More</a>
     </div>
@@ -92,7 +90,6 @@
 <script>
     var postBody = document.getElementById("{{.ID}}")
     var images = "{{.Images.String}}".split(",")
-    console.log("{{.ID}}", "{{.Images}}")
     images.forEach(i => {
         const img = document.createElement("img")
         img.src = i
