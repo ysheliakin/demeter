@@ -102,5 +102,5 @@ func GetDonationPosts(dbc context.Context, query *queries.Queries, ctx echo.Cont
         return err
     }
 
-    return ctx.Render(http.StatusOK, "donationPostFeed", donations)
+    return ctx.Render(http.StatusOK, "feed", donations)
 }

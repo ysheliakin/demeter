@@ -10,8 +10,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"demeter/handlers"
 	"demeter/db/generated"
+	"demeter/handlers"
 )
 
 type TemplateRegistry struct {
@@ -66,10 +66,7 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", nil)
 	})
-	e.GET("/donationPostFeed", func(c echo.Context) error {
-    return handlers.GetDonationPosts(dbc, query, c, e.Logger)
-	})
-	e.POST("/donationPostFeed", func(c echo.Context) error {
+	e.GET("/feed", func(c echo.Context) error {
 		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
 	})
 

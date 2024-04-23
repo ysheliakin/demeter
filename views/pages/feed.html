@@ -1,4 +1,4 @@
-{{block "index" .}}
+{{block "feed" .}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +12,14 @@
 <body hx-boost="true" class="d-flex flex-column min-vh-100">
 
     {{template "navbar" .}}
+
     <main class="container" id="page">
-        {{template "hero" .}}
-        {{template "about" .}}
+        {{template "post-feed" .}}
     </main>
+
     {{template "footer" .}}
 
     <link rel="stylesheet" href="bootstrap.min.css" />
 </body>
 
-</html>
 {{end}}
