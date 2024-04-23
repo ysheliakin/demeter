@@ -44,6 +44,12 @@ func main() {
 	defer conn.Close(dbc)
 	query := queries.New(conn)
 
+	e.GET("/post/:id", func(c echo.Context) error {
+		return handlers.GetDonationPost(dbc, query, c, e.Logger)
+	})
+	e.GET("/request/:id", func(c echo.Context) error {
+		return c.Render(200, "donate", nil)
+	})
 	e.GET("/location", func(c echo.Context) error {
 		return handlers.GetLocationResults(dbc, query, c, e.Logger)
 	})
@@ -62,12 +68,15 @@ func main() {
 	e.POST("/donate", func(c echo.Context) error {
 		return handlers.CreateDonation(dbc, query, c, e.Logger)
 	})
-	// NOTE: the more nested routes have to go first to not confuse echo
-	e.GET("/", func(c echo.Context) error {
-		return c.Render(200, "index", nil)
+	e.POST("/request", func(c echo.Context) error {
+		return c.Render(200, "donate", nil)
 	})
 	e.GET("/feed", func(c echo.Context) error {
 		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
+	})
+	// NOTE: the more nested routes have to go first to not confuse echo
+	e.GET("/", func(c echo.Context) error {
+		return c.Render(200, "index", nil)
 	})
 
 	port := os.Getenv("PORT")

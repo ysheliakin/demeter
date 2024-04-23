@@ -96,11 +96,24 @@ func CreateDonation(dbc context.Context, query *queries.Queries, ctx echo.Contex
 }
 
 func GetDonationPosts(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
-    // get donation post data
-    donations, err := query.GetDonations(dbc)
-    if err != nil {
-        return err
-    }
+	// get donation post data
+	donations, err := query.GetDonations(dbc)
+	if err != nil {
+		return err
+	}
 
-    return ctx.Render(http.StatusOK, "feed", donations)
+	return ctx.Render(http.StatusOK, "feed", donations)
+}
+
+func GetDonationPost(dbc context.Context, query *queries.Queries, ctx echo.Context, log echo.Logger) error {
+	// id, err := strconv.Atoi(ctx.Param("id"))
+	// if err != nil {
+	// 	return err
+	// }
+	// post, err := query.GetDonation(dbc, int32(id))
+	post, err := query.GetDonation(dbc, 44)
+	if err != nil {
+		return err
+	}
+	return ctx.Render(http.StatusOK, "post", post)
 }

@@ -8,4 +8,17 @@ values (
 returning id;
 
 -- name: GetDonations :many
-SELECT * FROM donations;
+SELECT * 
+FROM donations
+ORDER BY id DESC;
+
+-- name: GetDonation :one
+select *
+from donations
+where id = @id;
+
+-- name: CreateRequest :one
+insert into donation_requests(donation_id, requester_id, comment, created_at)
+values (@donation_id, @requester_id, @comment, NOW())
+returning id;
+
