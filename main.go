@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"demeter/db/generated"
+	queries "demeter/db/generated"
 	"demeter/handlers"
 )
 
@@ -66,13 +66,24 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(200, "index", nil)
 	})
-	e.GET("/feed", func(c echo.Context) error {
-		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
-	})
 
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "42069"
 	}
+
+	// Goth
+	handlers.GothUserProvider(port)
+
+	e.GET("/auth/:provider/callback", func(c echo.Context) error {
+		return handlers.GothCallback(c)
+	})
+	e.GET("/logout/:provider", func(c echo.Context) error {
+		return handlers.GothLogout(c)
+	})
+	e.GET("/auth/:provider", func(c echo.Context) error {
+		return handlers.GothAuth(c)
+	})
+
 	e.Logger.Fatal(e.Start("0.0.0.0:" + port))
 }
