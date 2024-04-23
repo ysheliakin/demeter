@@ -1,0 +1,45 @@
+{{block "request" .}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../htmx.min.js"></script>
+    <title>Demeter - food donation platform</title>
+</head>
+
+<body hx-boost="true" class="d-flex flex-column min-vh-100">
+
+    {{template "navbar" .}}
+
+    <main class="container" id="page">
+        {{block "donation-request-form" .}}
+        <div class="card my-3 mx-auto" style="max-width: 600px">
+            <div class="card-header">Request: {{.Title}}</div>
+            <div class="card-body">
+                <form id="post" hx-post="/request/{{.ID}}" hx-encoding="multipart/form-data" hx-swap="outerHTML"
+                    hx-select=".card, .alert" hx-target="closest .card" hx-indicator=".htmx-indicator">
+                    <div class="col-12 mb-3">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea class="form-control" name="comment" hx-post="/validate" required minlength="5"
+                            maxlength="4096" hx-trigger="revealed, keyup changed delay:200ms"
+                            hx-target="next .validation-result" hx-swap="innerHTML"></textarea>
+                        <div class="validation-result"></div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 my-2" type="submit">Submit</button>
+                        {{template "spinner" "Submitting form..."}}
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{end}}
+    </main>
+
+    {{template "footer" .}}
+
+    <link rel="stylesheet" href="../bootstrap.min.css" />
+</body>
+
+{{end}}

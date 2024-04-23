@@ -48,7 +48,10 @@ func main() {
 		return handlers.GetDonationPost(dbc, query, c, e.Logger)
 	})
 	e.GET("/request/:id", func(c echo.Context) error {
-		return c.Render(200, "donate", nil)
+		return handlers.RequestForm(dbc, query, c, e.Logger)
+	})
+	e.POST("/request/:id", func(c echo.Context) error {
+		return handlers.CreateRequest(dbc, query, c, e.Logger)
 	})
 	e.GET("/location", func(c echo.Context) error {
 		return handlers.GetLocationResults(dbc, query, c, e.Logger)
@@ -67,9 +70,6 @@ func main() {
 	})
 	e.POST("/donate", func(c echo.Context) error {
 		return handlers.CreateDonation(dbc, query, c, e.Logger)
-	})
-	e.POST("/request", func(c echo.Context) error {
-		return c.Render(200, "donate", nil)
 	})
 	e.GET("/feed", func(c echo.Context) error {
 		return handlers.GetDonationPosts(dbc, query, c, e.Logger)
