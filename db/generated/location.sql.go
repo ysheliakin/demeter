@@ -12,11 +12,11 @@ import (
 )
 
 const getDonationsInRange = `-- name: GetDonationsInRange :many
-
 select id, created_by_user_id, created_at, starts_at, ends_at, description, images, servings_total, servings_left, location_lat, location_long, title
 from donations
 where location_lat between $1 and $2
     and location_long between $3 and $4
+order by ((location_lat - ($2+@min_lat)/2) + (location_long - ($3+@max_long)/2))
 `
 
 type GetDonationsInRangeParams struct {
@@ -26,8 +26,7 @@ type GetDonationsInRangeParams struct {
 	MaxLong pgtype.Numeric
 }
 
-// FIXME: this results in wrong comiled code for some reason:
-// order by (location_lat - (@max_lat+@min_lat)/2) + (location_long - (@min_long+@max_long)/2);
+// FIXME: this results in wrong compiled code for some reason:
 func (q *Queries) GetDonationsInRange(ctx context.Context, arg GetDonationsInRangeParams) ([]Donation, error) {
 	rows, err := q.db.Query(ctx, getDonationsInRange,
 		arg.MinLat,
@@ -71,6 +70,7 @@ select id, is_organization, name, email, about, avatar_url, images, auth_provide
 from users
 where location_lat between $1 and $2
     and location_long between $3 and $4
+order by ((location_lat - ($2+@min_lat)/2) + (location_long - ($3+@max_long)/2))
 `
 
 type GetUsersInRangeParams struct {
@@ -80,6 +80,7 @@ type GetUsersInRangeParams struct {
 	MaxLong pgtype.Numeric
 }
 
+// FIXME: this results in wrong compiled code for some reason:
 func (q *Queries) GetUsersInRange(ctx context.Context, arg GetUsersInRangeParams) ([]User, error) {
 	rows, err := q.db.Query(ctx, getUsersInRange,
 		arg.MinLat,
