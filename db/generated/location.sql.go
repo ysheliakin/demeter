@@ -26,7 +26,6 @@ type GetDonationsInRangeParams struct {
 	MaxLong pgtype.Numeric
 }
 
-// FIXME: this results in wrong compiled code for some reason:
 func (q *Queries) GetDonationsInRange(ctx context.Context, arg GetDonationsInRangeParams) ([]Donation, error) {
 	rows, err := q.db.Query(ctx, getDonationsInRange,
 		arg.MinLat,
@@ -80,7 +79,6 @@ type GetUsersInRangeParams struct {
 	MaxLong pgtype.Numeric
 }
 
-// FIXME: this results in wrong compiled code for some reason:
 func (q *Queries) GetUsersInRange(ctx context.Context, arg GetUsersInRangeParams) ([]User, error) {
 	rows, err := q.db.Query(ctx, getUsersInRange,
 		arg.MinLat,
