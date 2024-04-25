@@ -35,13 +35,13 @@ func getCoordsRange(lat, long pgtype.Numeric, milesRange float64) (minLat, maxLa
 	degs2rads := math.Pi / 180.0
 	rads2degs := 180.0 / math.Pi
 
-	_lat := f64(lat)
+	latVal := f64(lat)
 	latDelta := milesRange / milesEarthRadius * rads2degs
-	minLat, maxLat = num(_lat-latDelta), num(_lat+latDelta)
+	minLat, maxLat = num(latVal-latDelta), num(latVal+latDelta)
 
-	_long := f64(long)
-	longDelta := milesRange / (milesEarthRadius * math.Cos(_lat*degs2rads)) * rads2degs
-	minLong, maxLong = num(_long-longDelta), num(_long+longDelta)
+	longVal := f64(long)
+	longDelta := milesRange / (milesEarthRadius * math.Cos(latVal*degs2rads)) * rads2degs
+	minLong, maxLong = num(longVal-longDelta), num(longVal+longDelta)
 
 	return
 }
